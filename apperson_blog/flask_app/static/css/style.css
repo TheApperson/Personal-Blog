@@ -1,0 +1,19 @@
+#top-nav {
+    display: flex;
+    justify-content: space-between;
+    border: solid black 1px;
+    align-items: center;
+}
+
+.top-nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.top-nav-links li a {
+    margin-right: 15px;
+}
+
+.top-nav-buttons {
+    padding-right: 15px;
+}
