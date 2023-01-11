@@ -19,16 +19,33 @@
             </ul>
         </div>
         <div class="top-nav-buttons">
-            <a href="/signin">Sign In</a>
+            <a href="/">Home</a>
         </div>
     </div>
     <div id="main-content">
-        <div class="blog-entries">
-            <p>Blog content goes here</p>
-        </div>
-        <div class="main-right-content">
-            <p>placeholder</p>
-        </div>
+        <form action="/login" method="post">
+            <h2>Login</h2>
+            {% with messages = get_flashed_messages(category_filter=['login']) %}
+                {% if messages %}
+                    <div role="alert">
+                        <strong>Please check Login information.</strong>
+                        {% for message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <div>
+                <label for="email">Email:</label>
+                <input type="text" name="email">
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" name="password">
+            </div>
+            <input type="submit" value="Login">
+            <a href="/registration">Need an account?</p>
+        </form>
     </div>
     <div id="bot-nav">
         <h3>TheAppersonian</h3>
