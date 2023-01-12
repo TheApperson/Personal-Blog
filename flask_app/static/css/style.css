@@ -38,6 +38,11 @@ body {
     margin-right: 10px;
 }
 
+textarea {
+    width: 200px;
+    height: 100px;
+}
+
 .main-right-content {
     border: solid black 1px;
     width: 20%;
