@@ -18,3 +18,12 @@ class Post:
         query = "INSERT INTO post (title, content, created_at, updated_at, author_id, parent_id) VALUES (%(title)s, %(content)s, NOW(), NOW(), %(author_id)s, %(parent_id)s);"
         author_id = connectToMySQL(cls.db_name).query_db(query, data)
         return author_id
+
+    @classmethod
+    def get_all(cls):
+        query = "SELECT * FROM post;"
+        results =  connectToMySQL(cls.db_name).query_db(query)
+        all_post = []
+        for row in results:
+            all_post.append( cls(row) )
+        return all_post

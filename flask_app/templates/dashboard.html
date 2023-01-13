@@ -23,15 +23,13 @@
         </div>
     </div>
     <div id="main-content">
-        <div class="blog-entries">
+        <div class="blog-form">
             <form action="/create" method="post">
                 <div>
-                    <label for="title">Title:</label>
-                    <input type="text" name="title">
+                    <input type="text" name="title" placeholder="Title:">
                 </div>
                 <div class="post-box">
-                    <label for="content">Content:</label>
-                    <textarea name="content" cols="30" rows="10"></textarea>
+                    <textarea name="content" placeholder="Content:" ></textarea>
                 </div>
                 <input type="submit" value="Post Entry">
             </form>
@@ -39,6 +37,19 @@
         <div class="main-right-content">
             <p>Welcome {{users.first_name}}</p>
         </div>
+    </div>
+    <div id="blog-entries">
+        {% for blogger in bloggers %}
+            {% for post in posts|sort(attribute='created_at', reverse = True) %}
+                {% if post.author_id == blogger.id %}
+                    <div class="blog-entries-ind">
+                        <h3>{{post.title}}</h3>
+                            <p>{{post.created_at.strftime('%B %d, %Y')}} By: {{blogger.first_name}}</p>
+                        <p>{{post.content}}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
     </div>
     <div id="bot-nav">
         <h3>TheAppersonian</h3>

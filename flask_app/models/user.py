@@ -39,6 +39,15 @@ class User:
             return False
         return cls(results[0])
 
+    @classmethod
+    def get_all_users(cls):
+        query = "SELECT * FROM user;"
+        results =  connectToMySQL(cls.db_name).query_db(query)
+        all_users = []
+        for row in results:
+            all_users.append( cls(row) )
+        return all_users
+
     @staticmethod
     def validate_registration(user):
         is_valid = True

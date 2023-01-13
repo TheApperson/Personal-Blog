@@ -1,7 +1,9 @@
+/*  */
 body {
     background-color: rgb(189, 186, 186);
 }
 
+/* the navigation bar at top */
 #top-nav {
     display: flex;
     justify-content: space-between;
@@ -11,6 +13,7 @@ body {
     margin: 10px;
 }
 
+/* links in nav bar */
 .top-nav-links {
     display: flex;
     list-style: none;
@@ -24,6 +27,7 @@ body {
     padding-right: 15px;
 }
 
+/* everything between top and bot navigation */
 #main-content {
     display: flex;
     justify-content: space-between;
@@ -31,23 +35,41 @@ body {
     margin: 10px;
 }
 
-.blog-entries {
-
+/* form for entry creation */
+.blog-form {
+    padding: 10px;
     border: solid black 1px;
     width: 80%;
     margin-right: 10px;
 }
 
+/* content section for post table */
 textarea {
-    width: 200px;
+    width: 80%;
     height: 100px;
 }
 
+/* currently a placeholder */
 .main-right-content {
     border: solid black 1px;
     width: 20%;
 }
 
+/* whole section for blog entries */
+#blog-entries {
+    margin: 10px;
+    border: solid black 1px;
+}
+
+/* individual blog posts */
+.blog-entries-ind {
+    margin: 10px;
+    border: solid black 1px;
+    background-color: white;
+    padding: 10px;
+}
+
+/* footer navigation */
 #bot-nav {
     background-color: aqua;
     border: solid black 1px;
@@ -64,3 +86,4 @@ textarea {
 .bot-nav-links li a {
     margin-right: 15px;
 }
+
