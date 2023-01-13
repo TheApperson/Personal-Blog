@@ -11,7 +11,10 @@ def create():
     data ={
         "title": request.form['title'],
         "content": request.form['content'],
-        "author_id": session["author_id"]
+        "author_id": session["author_id"],
+        "parent_id": 1
     }
     Post.save(data)
     return redirect('/dashboard')
+
+

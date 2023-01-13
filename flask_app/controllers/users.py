@@ -54,22 +54,9 @@ def dashboard():
     data ={
         'id': session['author_id']
     }
-    return render_template("dashboard.html", users=User.get_by_id(data))
+    return render_template("dashboard.html", users=User.get_by_id(data), posts=Post.get_all(), bloggers=User.get_all_users())
 
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect('/')
-
-@app.route('/create', methods=['POST'])
-def create():
-    if 'author_id' not in session:
-        return redirect ('/logout')
-    data ={
-        "title": request.form['title'],
-        "content": request.form['content'],
-        "author_id": session["author_id"],
-        "parent_id": 1
-    }
-    Post.save(data)
-    return redirect('/dashboard')
