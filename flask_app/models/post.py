@@ -13,13 +13,13 @@ class Post:
         self.author_id = data['author_id']
         self.parent_id = data['parent_id']
 
-    @classmethod
+    @classmethod #saves a new blog post
     def save(cls,data):
         query = "INSERT INTO post (title, content, created_at, updated_at, author_id, parent_id) VALUES (%(title)s, %(content)s, NOW(), NOW(), %(author_id)s, %(parent_id)s);"
         author_id = connectToMySQL(cls.db_name).query_db(query, data)
         return author_id
 
-    @classmethod
+    @classmethod #collects all posts in a list
     def get_all(cls):
         query = "SELECT * FROM post;"
         results =  connectToMySQL(cls.db_name).query_db(query)

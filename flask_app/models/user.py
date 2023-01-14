@@ -19,19 +19,19 @@ class User:
         self.updated_at = data['updated_at']
         self.posts = []
 
-    @classmethod
+    @classmethod #saves new user in database
     def save(cls,data):
         query = "INSERT INTO user (first_name, last_name, email, password, created_at, updated_at) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, NOW(), NOW());"
         author_id = connectToMySQL(cls.db_name).query_db(query, data)
         return author_id
 
-    @classmethod
+    @classmethod #pulls a user from database for session
     def get_by_id(cls,data):
         query = "SELECT * FROM user WHERE id = %(id)s;"
         results = connectToMySQL(cls.db_name).query_db(query,data)
         return cls(results[0])
 
-    @classmethod
+    @classmethod #pulls a user by email
     def get_by_email(cls,data):
         query = "SELECT * FROM user WHERE email = %(email)s;"
         results = connectToMySQL(cls.db_name).query_db(query,data)
@@ -39,7 +39,7 @@ class User:
             return False
         return cls(results[0])
 
-    @classmethod
+    @classmethod #collects all users in a list
     def get_all_users(cls):
         query = "SELECT * FROM user;"
         results =  connectToMySQL(cls.db_name).query_db(query)
@@ -48,7 +48,7 @@ class User:
             all_users.append( cls(row) )
         return all_users
 
-    @staticmethod
+    @staticmethod #validates proper information to create new user
     def validate_registration(user):
         is_valid = True
         query = "SELECT * FROM user WHERE email = %(email)s;"
