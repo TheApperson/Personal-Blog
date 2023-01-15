@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, session, request
+from flask import render_template, redirect, url_for, session, request, flash
 from flask_app import app
 from flask_app.models.user import User
 from flask_app.models.post import Post
@@ -7,15 +7,23 @@ from flask_app.models.post_comment import Post_Comment
 @app.route('/create', methods=['POST'])
 def create():
     if 'author_id' not in session:
-        return redirect ('/logout')
-    data ={
-        "title": request.form['title'],
-        "content": request.form['content'],
-        "author_id": session["author_id"],
-        "parent_id": 1
-    }
-    Post.save(data)
-    return redirect('/dashboard')
+        flash("Must be logged in to post", "blog")
+        return redirect ('/')
+    if len(request.form['title']) < 1:
+        flash("You must enter a title. ","blog")
+        return redirect ('/')
+    if len(request.form['content']) < 1:
+        flash("You must add content. ","blog")
+        return redirect ('/')
+    else:
+        data ={
+            "title": request.form['title'],
+            "content": request.form['content'],
+            "author_id": session["author_id"],
+            "parent_id": 1
+        }
+        Post.save(data)
+    return redirect('/')
 
 @app.route('/edit/<int:id>')
 def edit(id):
@@ -37,4 +45,4 @@ def update_post():
     }
     print(data)
     Post.update(data)
-    return redirect('/dashboard')
+    return redirect('/')
