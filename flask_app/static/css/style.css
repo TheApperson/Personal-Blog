@@ -1,16 +1,18 @@
 /*  */
 body {
     background-color: rgb(189, 186, 186);
+    margin: 0px;
 }
 
 /* the navigation bar at top */
 #top-nav {
     display: flex;
+    position: fixed;
+    width: 100%;
+    top: 0px;
     justify-content: space-between;
-    border: solid black 1px;
     align-items: center;
     background-color: rgb(128, 128, 231);
-    margin: 10px;
 }
 
 /* links in nav bar */
@@ -32,7 +34,7 @@ body {
     display: flex;
     justify-content: space-between;
     border: solid black 1px;
-    margin: 10px;
+    margin: 100px 10px 0px 10px;
 }
 
 /* form for entry creation */
@@ -47,6 +49,8 @@ body {
 textarea {
     width: 80%;
     height: 100px;
+    resize: none;
+    margin-top: 5px;
 }
 
 /* currently a placeholder */
@@ -69,13 +73,19 @@ textarea {
     padding: 10px;
 }
 
+.blog-entries-ind:hover {
+    border: solid rgb(196, 5, 5) 1px;
+    transition: .6s ease-in;
+}
+
 /* footer navigation */
 #bot-nav {
     background-color: aqua;
-    border: solid black 1px;
     display: flex;
+    position: bottom;
+    bottom: 0;
+    width: 100%;
     justify-content: space-evenly;
-    margin: 10px;
 }
 
 .bot-nav-links {
@@ -86,4 +96,24 @@ textarea {
 .bot-nav-links li a {
     margin-right: 15px;
 }
+
+#main-content-edit {
+    text-align: center;
+    justify-content: center;
+    margin: 100px 10px 0px 10px;
+    height: 100%;
+}
+
+.blog-form-edit {
+    justify-content: center;
+    padding: 10px;
+}
+
+.blog-form-edit textarea {
+    height: 500px;
+}
+
+.edit-title {
+    width: 80%;
+} 
 

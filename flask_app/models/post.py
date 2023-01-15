@@ -2,6 +2,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 
 
+
 class Post:
     db_name = "apperson_blog_schema"
     def __init__(self,data):
@@ -27,3 +28,14 @@ class Post:
         for row in results:
             all_post.append( cls(row) )
         return all_post
+    
+    @classmethod
+    def get_one(cls,data):
+        query = "SELECT * FROM post WHERE id = %(id)s;"
+        results = connectToMySQL(cls.db_name).query_db(query,data)
+        return cls( results[0] )
+
+    @classmethod #edit funds
+    def update(cls,data):
+        query = "UPDATE post SET title=%(title)s, content=%(content)s, updated_at=NOW() WHERE id = %(id)s;"
+        return connectToMySQL(cls.db_name).query_db(query,data)

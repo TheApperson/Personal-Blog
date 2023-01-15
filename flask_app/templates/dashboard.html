@@ -39,11 +39,15 @@
         </div>
     </div>
     <div id="blog-entries">
-        {% for blogger in bloggers %}
-            {% for post in posts|sort(attribute='created_at', reverse = True) %}
+        {% for post in posts|sort(attribute='first_name', reverse = True) %}
+            {% for blogger in bloggers %}
                 {% if post.author_id == blogger.id %}
                     <div class="blog-entries-ind">
-                        <h3>{{post.title}}</h3>
+                        {% if users.id == post.author_id%}
+                            <h3>{{post.title}} <a href="/edit/{{post.id}}" class="">Edit</a></h3>
+                        {% else %}
+                            <h3>{{post.title}}</h3>
+                        {% endif %}
                             <p>{{post.created_at.strftime('%B %d, %Y')}} By: {{blogger.first_name}}</p>
                         <p>{{post.content}}</p>
                     </div>
@@ -62,5 +66,6 @@
             </ul>
         </div>
     </div>
+    <script src="../static/js/myscripts.js"></script>
 </body>
 </html>
