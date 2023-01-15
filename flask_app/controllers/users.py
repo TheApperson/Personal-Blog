@@ -8,10 +8,6 @@ from flask import flash
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
 @app.route('/registration')
 def registration():
     return render_template('register.html')
@@ -32,7 +28,7 @@ def register():
     }
     id = User.save(data)
     session['author_id'] = id
-    return redirect('/dashboard')
+    return redirect('/')
 
 @app.route('/login',methods=['POST'])
 def login():
@@ -45,12 +41,12 @@ def login():
         flash("Invalid Password","login")
         return redirect('/signin')
     session['author_id'] = user.id
-    return redirect('/dashboard')
+    return redirect('/')
 
-@app.route('/dashboard')
+@app.route('/')
 def dashboard():
     if 'author_id' not in session:
-        return redirect('/logout')
+        return render_template("dashboard.html", users=User.guest(), posts=Post.get_all(), bloggers=User.get_all_users())
     data ={
         'id': session['author_id']
     }

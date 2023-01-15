@@ -19,11 +19,24 @@
             </ul>
         </div>
         <div class="top-nav-buttons">
+            {% if users %} 
             <a href="/logout">Sign Out</a>
+            {% else %}
+            <a href="/signin">Sign In</a>
+            {% endif %}
         </div>
     </div>
     <div id="main-content">
         <div class="blog-form">
+            {% with messages = get_flashed_messages(category_filter=['blog']) %}
+                {% if messages %}
+                    <div role="alert">
+                        {% for message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
             <form action="/create" method="post">
                 <div>
                     <input type="text" name="title" placeholder="Title:">
@@ -35,15 +48,19 @@
             </form>
         </div>
         <div class="main-right-content">
-            <p>Welcome {{users.first_name}}</p>
+            {% if users %}
+                <p>Welcome {{users.first_name}}</p>
+            {% else %}
+                <p>Welcome Guest</p>
+            {% endif %}
         </div>
     </div>
     <div id="blog-entries">
-        {% for post in posts|sort(attribute='first_name', reverse = True) %}
+        {% for post in posts|sort(attribute='created_at', reverse = True) %}
             {% for blogger in bloggers %}
-                {% if post.author_id == blogger.id %}
+                {% if post.author_id == blogger.id and post.content|length > 10 %}
                     <div class="blog-entries-ind">
-                        {% if users.id == post.author_id%}
+                        {% if users.id == post.author_id %}
                             <h3>{{post.title}} <a href="/edit/{{post.id}}" class="">Edit</a></h3>
                         {% else %}
                             <h3>{{post.title}}</h3>

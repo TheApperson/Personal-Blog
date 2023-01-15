@@ -31,6 +31,11 @@ class User:
         results = connectToMySQL(cls.db_name).query_db(query,data)
         return cls(results[0])
 
+    @classmethod
+    def guest(cls):
+        first_name = 'guest'
+        return print(first_name)
+
     @classmethod #pulls a user by email
     def get_by_email(cls,data):
         query = "SELECT * FROM user WHERE email = %(email)s;"
