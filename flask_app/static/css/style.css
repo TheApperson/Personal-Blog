@@ -88,6 +88,15 @@ textarea {
     justify-content: space-evenly;
 }
 
+#bot-nav-short {
+    background-color: aqua;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
 .bot-nav-links {
     display: flex;
     list-style: none;
@@ -117,3 +126,27 @@ textarea {
     width: 80%;
 } 
 
+/*#color-art {
+    border: solid black 1px;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: flex-end;
+    max-height: 50%;
+}
+
+.color-row {
+    background-color: red;
+    width: .5%;
+    height: .5%;
+}
+
+.color-row:hover {
+    background-color: blue;
+}
+
+
+.color-col {
+    width: .5%;
+    height: .5%;
+    background-color: cyan;
+} */

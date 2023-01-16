@@ -8,38 +8,19 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="top-nav">
-        <h1>TheAppersonian</h1>
-        <div>
-            <ul class="top-nav-links">
-                <li><a href="">Portfolio</a></li>
-                <li><a href="">Videos</a></li>
-                <li><a href="">Resources</a></li>
-                <li><a href="">Placeholders</a></li>
-            </ul>
-        </div>
-        <div class="top-nav-buttons">
-            <a href="/signin">Sign In</a>
-        </div>
+    <div id="color-art">
+        {% for i in range(50) %}
+        <div class="color-row">.</div>
+            {% for j in range(198) %}
+            <div class="color-col" id="boundary">
+                <span >.</span>
+            </div>
+            {% endfor %}
+        {% endfor %}
     </div>
-    <div id="main-content">
-        <div class="blog-entries">
-            <a href="/">Need an account?</a>
-        </div>
-        <div class="main-right-content">
-            <p>placeholder</p>
-        </div>
-    </div>
-    <div id="bot-nav">
-        <h3>TheAppersonian</h3>
-        <div>
-            <ul class="bot-nav-links">
-                <li><a href="">About</a></li>
-                <li><a href="">Wireframe</a></li>
-                <li><a href="">ERD</a></li>
-                <li><a href="">Github</a></li>
-            </ul>
-        </div>
-    </div>
+    <script>
+        document.getElementById("boundary").style.backgroundColor =
+        "green";
+    </script>
 </body>
-</html>-->
+</html>

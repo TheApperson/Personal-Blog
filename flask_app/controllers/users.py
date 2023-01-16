@@ -56,3 +56,7 @@ def dashboard():
 def logout():
     session.clear()
     return redirect('/')
+
+"""@app.route('/colorful')
+def colorful():
+    return render_template('index.html')"""
