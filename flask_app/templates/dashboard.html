@@ -66,7 +66,9 @@
                             <h3>{{post.title}}</h3>
                         {% endif %}
                             <p>{{post.created_at.strftime('%B %d, %Y')}} By: {{blogger.first_name}}</p>
-                        <p>{{post.content}}</p>
+                            {% set list1 = post.content |truncate(20) %}
+                            <p class="post-content"><span id="dots">{{list1}} </span> <span id="more">{{post.content}}</span></p>
+                            
                     </div>
                 {% endif %}
             {% endfor %}

@@ -70,8 +70,21 @@ textarea {
     margin: 10px;
     border: solid black 1px;
     background-color: white;
-    padding: 10px;
+    padding-left: 10px;
 }
+
+
+#more {
+    display: none;
+}
+
+/* shorten view of post 
+.post-content {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 60%;
+}*/
 
 .blog-entries-ind:hover {
     border: solid rgb(196, 5, 5) 1px;

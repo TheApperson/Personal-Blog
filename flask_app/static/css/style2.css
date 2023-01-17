@@ -1,0 +1,51 @@
+html {
+    text-align: center;
+    font-family: Monaco;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    display: inline-block;
+}
+
+.square {
+    background-color: white;
+    border: 1px solid black;
+    /*border-radius: 50%;*/
+}
+
+.square2 {
+    background-color: rgb(39, 29, 179);
+    animation: blinker 1s linear infinite;
+    border: 1px solid black;
+    transition-delay: 2s;
+    /*border-radius: 50%;*/
+}
+
+@keyframes blinker {
+    90% {
+        opacity: 0;
+    }
+}
+
+.color {
+    background-color: gray;
+    /*border-radius: 50%;*/
+}
+
+.gridContainer {
+    background-color: gray;
+    margin-top: 25px;
+    margin-right: 40px;
+    display: inline-grid;
+    grid-template-columns: repeat(16, 2fr);
+    grid-template-rows: repeat(16, 2fr);
+    border: 5px solid black;
+    /*border-radius: 50%;*/
+    overflow: hidden;
+    height: 575px;
+    width: 575px;
+}
