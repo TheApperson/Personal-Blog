@@ -1,7 +1,7 @@
-function myFunction() {
-    var dots = document.getElementById("dots");
-    var moreText = document.getElementById("more");
-    var btnText = document.getElementById("myBtn");
+function myFunction(id) {
+    var dots = document.getElementById("dots-"+id);
+    var moreText = document.getElementById("more-"+id);
+    var btnText = document.getElementById("myBtn-"+id);
 
     if (dots.style.display === "none") {
         dots.style.display = "inline";
@@ -37,7 +37,7 @@ grid.style.setProperty(
     "grid-template-rows",
     `repeat(${userInput.value}, 2fr)`
 );
-  for (let i = 0; i < userInput.value * userInput.value; i++) {
+for (let i = 0; i < userInput.value * userInput.value; i++) {
     const div = document.createElement("div");
     div.classList.add("square");
     grid.appendChild(div);

@@ -14,7 +14,7 @@ html {
 .square {
     background-color: white;
     border: 1px solid black;
-    /*border-radius: 50%;*/
+    border-radius: 50%;
 }
 
 .square2 {
@@ -22,7 +22,7 @@ html {
     animation: blinker 1s linear infinite;
     border: 1px solid black;
     transition-delay: 2s;
-    /*border-radius: 50%;*/
+    border-radius: 50%;
 }
 
 @keyframes blinker {
@@ -33,7 +33,7 @@ html {
 
 .color {
     background-color: gray;
-    /*border-radius: 50%;*/
+    border-radius: 50%;
 }
 
 .gridContainer {
@@ -44,7 +44,7 @@ html {
     grid-template-columns: repeat(16, 2fr);
     grid-template-rows: repeat(16, 2fr);
     border: 5px solid black;
-    /*border-radius: 50%;*/
+    border-radius: 50%;
     overflow: hidden;
     height: 575px;
     width: 575px;

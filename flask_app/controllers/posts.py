@@ -8,13 +8,15 @@ from flask_app.models.post_comment import Post_Comment
 def create():
     if 'author_id' not in session:
         flash("Must be logged in to post", "blog")
-        return redirect ('/')
+        return redirect('/')
     if len(request.form['title']) < 1:
         flash("You must enter a title. ","blog")
-        return redirect ('/')
+    if len(request.form['title']) > 150:
+        flash("Title is too long. ","blog")
     if len(request.form['content']) < 1:
         flash("You must add content. ","blog")
-        return redirect ('/')
+    if len(request.form['content']) < 20:
+        flash("Content is too short. ","blog")
     else:
         data ={
             "title": request.form['title'],

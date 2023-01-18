@@ -50,28 +50,35 @@
         <div class="main-right-content">
             {% if users %}
                 <p>Welcome {{users.first_name}}</p>
+                <p>"Be better than you were yesterday."</p>
             {% else %}
                 <p>Welcome Guest</p>
+                <p>"You can do anything you put your mind</p>
             {% endif %}
         </div>
     </div>
     <div id="blog-entries">
         {% for post in posts|sort(attribute='created_at', reverse = True) %}
-            {% for blogger in bloggers %}
-                {% if post.author_id == blogger.id and post.content|length > 10 %}
+            {% if post.content|length > 10 %}
+                {% for blogger in bloggers if post.author_id == blogger.id %}
                     <div class="blog-entries-ind">
-                        {% if users.id == post.author_id %}
-                            <h3>{{post.title}} <a href="/edit/{{post.id}}" class="">Edit</a></h3>
-                        {% else %}
-                            <h3>{{post.title}}</h3>
-                        {% endif %}
-                            <p>{{post.created_at.strftime('%B %d, %Y')}} By: {{blogger.first_name}}</p>
-                            {% set list1 = post.content |truncate(20) %}
-                            <p class="post-content"><span id="dots">{{list1}} </span> <span id="more">{{post.content}}</span></p>
-                            
+                        <h3>{{post.title}} 
+                            {% if users.id == post.author_id %}
+                                <a href="/edit/{{post.id}}" class="">Edit</a>
+                            {% endif %}
+                        </h3>
+                        <p>{{post.created_at.strftime('%B %d, %Y')}} By: {{blogger.first_name}}</p>
+                        {% set list1 = post.content[:20] %}
+                        <p class="post-content">
+                            <span id="dots-{{post.id}}">{{list1}}... </span> 
+                            <span class="more" id="more-{{post.id}}">{{post.content}}</span>
+                            {% if post.content|length > 20 %}
+                            <button id="myBtn-{{post.id}}" onclick="myFunction({{post.id}})">Read more</button>
+                            {% endif %}
+                        </p>
                     </div>
-                {% endif %}
-            {% endfor %}
+                {% endfor %}
+            {% endif %}
         {% endfor %}
     </div>
     <div id="bot-nav">
