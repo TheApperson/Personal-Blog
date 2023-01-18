@@ -73,25 +73,19 @@ textarea {
     border-left: 0px;
     background-color: rgb(189, 186, 186);
     padding-left: 10px;
-    -webkit-transition: margin-left .6s;
+    -webkit-transition: margin-left .6s, background-color 2s;
+    transition: margin-left .6s, background-color 2s;
 }
 
 .more {
     display: none;
 }
 
-@keyframes post-color-hover {
-    from {background-color: rgb(189, 186, 186);}
-    to {background-color: whitesmoke;}
-}
-
 .blog-entries-ind:hover {
     margin-left: solid black 1px;
     border-left: solid black 1px;
     margin-left: 10px;
-    animation-name: post-color-hover;
-    animation-duration: 2s;
-    -webkit-transition: margin-left .6s;
+    background-color: whitesmoke;
 }
 
 /* footer navigation */
@@ -141,3 +135,7 @@ textarea {
 .edit-title {
     width: 80%;
 } 
+
+.edit-post {
+    font-size: small;
+}

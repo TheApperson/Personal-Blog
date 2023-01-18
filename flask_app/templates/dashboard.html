@@ -64,7 +64,7 @@
                     <div class="blog-entries-ind">
                         <h3>{{post.title}} 
                             {% if users.id == post.author_id %}
-                                <a href="/edit/{{post.id}}" class="">Edit</a>
+                                <a href="/edit/{{post.id}}" class="edit-post"><small>Edit</small></a>
                             {% endif %}
                         </h3>
                         <p>{{post.created_at.strftime('%B %d, %Y')}} By: {{blogger.first_name}}</p>
