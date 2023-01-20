@@ -10,42 +10,44 @@
 <body>
     <div id="top-nav">
         <h1>TheAppersonian</h1>
-        <div>
-            <ul class="top-nav-links">
-                <li><a href="">Portfolio</a></li>
-                <li><a href="">Videos</a></li>
-                <li><a href="">Resources</a></li>
-                <li><a href="/colorful">Colorful</a></li>
-            </ul>
-        </div>
         <div class="top-nav-buttons">
             {% if users %} 
             <a href="/logout">Sign Out</a>
             {% else %}
             <a href="/signin">Sign In</a>
             {% endif %}
+            <div class="menu">
+                <div class="hamburger">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </div>
+                <ul class="top-nav-links">
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="/colorful">Colorful</a></li>
+                </ul>
+            </div>
         </div>
     </div>
     <div id="main-content">
         <div class="blog-form">
             {% with messages = get_flashed_messages(category_filter=['blog']) %}
                 {% if messages %}
-                    <div role="alert">
-                        {% for message in messages %}
-                            <p>{{message}}</p>
-                        {% endfor %}
-                    </div>
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
                 {% endif %}
+                <form action="/create" method="post">
+                    <div>
+                        <input type="text" name="title" placeholder="Title:">
+                    </div>
+                    <div class="post-box">
+                        <textarea name="content" placeholder="Content:" ></textarea>
+                    </div>
+                    <input type="submit" value="Post Entry" class="post-button">
+                </form>
             {% endwith %}
-            <form action="/create" method="post">
-                <div>
-                    <input type="text" name="title" placeholder="Title:">
-                </div>
-                <div class="post-box">
-                    <textarea name="content" placeholder="Content:" ></textarea>
-                </div>
-                <input type="submit" value="Post Entry">
-            </form>
         </div>
         <div class="main-right-content">
             {% if users %}
@@ -65,6 +67,7 @@
                         <h3>{{post.title}} 
                             {% if users.id == post.author_id %}
                                 <a href="/edit/{{post.id}}" class="edit-post"><small>Edit</small></a>
+                                <a href="/delete/post/{{post.id}}" class="edit-post"><small>Delete</small></a>
                             {% endif %}
                         </h3>
                         <p>{{post.created_at.strftime('%B %d, %Y')}} By: {{blogger.first_name}}</p>

@@ -9,14 +9,8 @@ def create():
     if 'author_id' not in session:
         flash("Must be logged in to post", "blog")
         return redirect('/')
-    if len(request.form['title']) < 1:
-        flash("You must enter a title. ","blog")
-    if len(request.form['title']) > 150:
-        flash("Title is too long. ","blog")
-    if len(request.form['content']) < 1:
-        flash("You must add content. ","blog")
-    if len(request.form['content']) < 20:
-        flash("Content is too short. ","blog")
+    elif not Post.validate_post(request.form):
+        return redirect('/')
     else:
         data ={
             "title": request.form['title'],
@@ -47,4 +41,14 @@ def update_post():
     }
     print(data)
     Post.update(data)
+    return redirect('/')
+
+@app.route('/delete/post/<int:id>')
+def delete_goal(id):
+    if 'author_id' not in session:
+        return redirect('/logout')
+    data = {
+        "id":id
+    }
+    Post.delete(data)
     return redirect('/')

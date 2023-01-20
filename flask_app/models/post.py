@@ -39,3 +39,19 @@ class Post:
     def update(cls,data):
         query = "UPDATE post SET title=%(title)s, content=%(content)s, updated_at=NOW() WHERE id = %(id)s;"
         return connectToMySQL(cls.db_name).query_db(query,data)
+
+    @staticmethod #validates proper information to create new user
+    def validate_post(post):
+        is_valid = True
+        if len(post['title']) < 1:
+            flash("You must enter a title. ","blog")
+            is_valid = False
+        if len(post['content']) < 20:
+            flash("Content is too short. ","blog")
+            is_valid = False
+        return is_valid
+
+    @classmethod
+    def delete(cls,data):
+        query = "DELETE FROM post WHERE id = %(id)s;"
+        return connectToMySQL(cls.db_name).query_db(query,data)
