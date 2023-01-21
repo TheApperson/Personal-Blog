@@ -8,14 +8,17 @@ from flask import flash
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
+#new user registration route
 @app.route('/registration')
 def registration():
     return render_template('register.html')
 
+#existing user route
 @app.route('/signin')
 def signin():
     return render_template('login.html')
 
+#runs registration validation to send to User.save
 @app.route('/register', methods=['POST'])
 def register():
     if not User.validate_registration(request.form):
@@ -30,6 +33,7 @@ def register():
     session['author_id'] = id
     return redirect('/')
 
+#login and redirect to dashboard with session
 @app.route('/login',methods=['POST'])
 def login():
     user = User.get_by_email(request.form)
@@ -43,6 +47,7 @@ def login():
     session['author_id'] = user.id
     return redirect('/')
 
+#dashboard accessible to guests and users.
 @app.route('/')
 def dashboard():
     if 'author_id' not in session:
@@ -52,11 +57,13 @@ def dashboard():
     }
     return render_template("dashboard.html", users=User.get_by_id(data), posts=Post.get_all(), bloggers=User.get_all_users())
 
+#logout with dashboard redirect
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect('/')
 
+#dev playground, test page for minor project clones
 @app.route('/colorful')
 def colorful():
     return render_template('index.html')
