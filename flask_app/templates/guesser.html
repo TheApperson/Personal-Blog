@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guessing game</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages(category_filter=['guess']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+    <form action="/guesser" method="post">
+        <input type="number" id="guess" name="guess" placeholder="Your guess">
+        <button type="submit">Submit</button>
+    </form>
+    {% endwith %}
+    <div>
+        {% if guess == answer %}
+        <p>YOU GOT IT!</p>
+        {% endif %}
+    </div>
+    <div>{{guess}}</div>
+    <div>{{answer}}</div>
+    <div>{{guess_min}}</div>
+    <div>{{guess_max}}</div>
+</body>
+</html>
