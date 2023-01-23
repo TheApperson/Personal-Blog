@@ -1,9 +1,11 @@
-from flask import render_template, redirect, url_for, session, request
+from flask import render_template, redirect, url_for, session, request, jsonify
 from flask_app import app
 from flask_app.models.user import User
 from flask_app.models.post import Post
 from flask_app.models.post_comment import Post_Comment
+from flask_app.models import number_game
 from flask import flash
+import random
 
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
@@ -67,3 +69,39 @@ def logout():
 @app.route('/colorful')
 def colorful():
     return render_template('index.html')
+
+def build_list(x):
+    result = []
+    for i in range(x+1):
+        if i == 0:
+            pass
+        else:
+            result.append(i)
+    return result
+
+@app.route('/guesser', methods=['GET', 'POST'])
+def guesser():
+    build_list(100000)
+    if request.method == 'POST':
+        last_guess = 0
+        guess = request.form['guess']
+        if 'answer' not in session:
+            session['answer'] = random.randint(1, 100000)
+            session['guess_min'] = 1
+            session['guess_max'] = 100000
+        else:
+            if guess == "":
+                flash("Enter a guess!","guess")
+            elif int(guess) <= int(session['guess_min']) or int(guess) >= int(session['guess_max']):
+                flash("Invalid guess","guess")
+            elif int(guess) > session['answer']:
+                last_guess = guess
+                session['guess_max'] = guess
+            elif int(guess) < session['answer']:
+                last_guess = guess
+                session['guess_min'] = guess
+            else:
+                last_guess = guess
+        return render_template('guesser.html', answer=session.get('answer'), guess_min=session.get('guess_min'),
+        guess_max=session.get('guess_max'), guess = last_guess)
+    return render_template('guesser.html')
