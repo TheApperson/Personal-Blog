@@ -2,27 +2,45 @@
 <html>
 <head>
     <title>Guessing game</title>
+    <link rel="stylesheet" href="../static/css/style3.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
 </head>
-<body>
-    {% with messages = get_flashed_messages(category_filter=['guess']) %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <p>{{message}}</p>
-                    {% endfor %}
-                {% endif %}
-    <form action="/guesser" method="post">
-        <input type="number" id="guess" name="guess" placeholder="Your guess">
-        <button type="submit">Submit</button>
-    </form>
-    {% endwith %}
+<body id="container">
     <div>
-        {% if guess == answer %}
-        <p>YOU GOT IT!</p>
-        {% endif %}
+        <a href="/">Home</a>
     </div>
-    <div>{{guess}}</div>
-    <div>{{answer}}</div>
-    <div>{{guess_min}}</div>
-    <div>{{guess_max}}</div>
+    <div id="guess-bar">
+        {% if answer %}
+        <p>You have {{turns_left}} guesses!</p>
+        <p>Submit an guess between {{guess_min}} and {{guess_max}}:</p>
+        {% else %}
+        <p>Play again?</p>
+        <p>Guess a new number between 1 and 1000</p>
+        {% endif %}
+        {% with messages = get_flashed_messages(category_filter=['guess']) %}
+        <form action="/guesser" method="post" class="guess-form">
+            <input type="number" id="guess" name="guess" autocomplete="off" autofocus>
+            <button type="submit">Submit</button>
+        </form>
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <div class="graph">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
 </body>
 </html>

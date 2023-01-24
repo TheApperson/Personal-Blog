@@ -1,0 +1,65 @@
+#container {
+    background-color: #020c1b;
+    margin: 0;
+}
+
+#guess-bar {
+    text-align: center;
+    font-family: 'Fira Code', monospace;
+    margin-top: 300px;
+    font-size: x-large;
+}
+
+.guess-form *{
+    color: #020c1b;
+    font-family: 'Fira Code', monospace;
+    background-color: #64ffda;
+}
+
+input {
+    height: 50%;
+    width: 25%;
+    text-align: center;
+    font-size: xx-large;
+    border-radius: 4px;
+}
+
+button {
+    font-size: xx-large;
+    border-radius: 4px;
+}
+
+body {
+    color: #64ffda;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.graph {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    cursor: pointer;
+    position: fixed;
+    bottom: 0px;
+}
+
+.bar {
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 20%;
+    height: 100px;
+    border-radius: 2px;
+    background-color:#495670;
+    transition: transform 4s ease-in, background-color 4s ease-in;
+}
+
+.bar:hover {
+    transform: scaleY(7.5);
+    background-color:#64ffda;
+    transition: transform 1s ease-out, background-color .5s ease-out;
+}
