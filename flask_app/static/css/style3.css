@@ -20,13 +20,24 @@ input {
     height: 50%;
     width: 25%;
     text-align: center;
-    font-size: xx-large;
+    font-size: large;
+    padding: 5px 10px;
     border-radius: 4px;
 }
 
-button {
-    font-size: xx-large;
+.game-btn {
+    font-size: large;
+    padding: 5px 10px;
+    border: 1px solid #64ffda;
     border-radius: 4px;
+    color: #64ffda;
+    background-color: #020c1b;
+    transition: background-color .2s ease-in;
+    cursor: pointer;
+}
+
+.game-btn:hover {
+    background-color: rgba(100, 255, 218, 20%);
 }
 
 body {

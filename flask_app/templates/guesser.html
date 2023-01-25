@@ -21,8 +21,13 @@
         {% endif %}
         {% with messages = get_flashed_messages(category_filter=['guess']) %}
         <form action="/guesser" method="post" class="guess-form">
+            {% if answer %}
             <input type="number" id="guess" name="guess" autocomplete="off" autofocus>
-            <button type="submit">Submit</button>
+            <button type="submit" class="game-btn">Submit</button>
+            {% else %}
+            <input type="hidden" id="guess" name="guess" value="0">
+            <button type="submit" class="game-btn">Play</button>
+            {% endif %}
         </form>
             {% if messages %}
                 {% for message in messages %}
