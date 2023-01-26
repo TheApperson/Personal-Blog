@@ -111,7 +111,7 @@ def guesser():
                 session['guess_min'] = guess
             else:
                 remaining_guess = session['turns_left']
-                flash(f"You win! With {remaining_guess} guesses left.", "guess")
+                flash(f"You win! With {remaining_guess -1} guesses left.", "guess")
                 session.pop('answer', None)
         return render_template('guesser.html', answer=session.get('answer'), guess_min=session.get('guess_min'),
         guess_max=session.get('guess_max'), guess = last_guess, turns_left=session.get('turns_left'), last_answer=last_answer, remaining_guess=remaining_guess)
