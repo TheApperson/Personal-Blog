@@ -11,3 +11,11 @@ class Post_Comment:
         self.parent_id = data['parent_id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+
+#create
+
+#read
+
+#update
+
+#delete
