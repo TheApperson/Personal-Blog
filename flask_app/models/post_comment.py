@@ -13,7 +13,11 @@ class Post_Comment:
         self.updated_at = data['updated_at']
 
 #create
-
+    @classmethod #saves new post_comment in database
+    def save(cls,data):
+        query = "INSERT INTO post_comment (content, title, post_id, parent_id, created_at, updated_at) VALUES (%(content)s, %(title)s, %(post_id)s, %(parent_id)s, NOW(), NOW());"
+        author_id = connectToMySQL(cls.db_name).query_db(query, data)
+        return author_id
 #read
 
 #update
