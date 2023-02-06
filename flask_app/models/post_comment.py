@@ -23,3 +23,7 @@ class Post_Comment:
 #update
 
 #delete
+    @classmethod
+    def delete(cls,data):
+        query = "DELETE FROM post_comment WHERE id = %(id)s;"
+        return connectToMySQL(cls.db_name).query_db(query,data)
