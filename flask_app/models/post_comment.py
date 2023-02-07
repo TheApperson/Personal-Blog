@@ -19,7 +19,11 @@ class Post_Comment:
         author_id = connectToMySQL(cls.db_name).query_db(query, data)
         return author_id
 #read
-
+    @classmethod
+    def get_one_with_post(cls,data):
+        query = "SELECT * FROM post_comment WHERE post_id = %(post_id)s;"
+        results = connectToMySQL(cls.db_name).query_db(query,data)
+        return cls( results[0])
 #update
 
 #delete
