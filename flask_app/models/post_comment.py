@@ -25,7 +25,10 @@ class Post_Comment:
         results = connectToMySQL(cls.db_name).query_db(query,data)
         return cls( results[0])
 #update
-
+    @classmethod #edit funds
+    def update(cls,data):
+        query = "UPDATE post_comment SET content=%(content)s, title=%(title)s, updated_at=NOW() WHERE id = %(id)s;"
+        return connectToMySQL(cls.db_name).query_db(query,data)
 #delete
     @classmethod
     def delete(cls,data):
