@@ -6,18 +6,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" sizes="180x180" href="../static/img/favicon_io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../static/img/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../static/img/favicon_io/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:title" content="Guessing Game"/>
+<meta property="og:image" content="https://ibb.co/QDTjFgD"/>
+<meta property="og:description" content="1 to 1000"/>
+<meta property="og:url" content="http://guessing-game.herokuapp.com"/>
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="627"/>
+<meta property="og:type" content="website"/> 
 </head>
 <body id="container">
-    <div>
-        <a href="/">Home</a>
-    </div>
+    <p>Games Played: {{games_played}}</p>
     <div id="guess-bar">
         {% if answer %}
-        <p>You have {{turns_left}} guesses!</p>
+        <p>You have {{turns_left}} {{'guess' if turns_left == 1 else 'guesses'}} left.</p>
         <p>Submit an guess between {{guess_min}} and {{guess_max}}:</p>
+        {% elif win %}
+        <p>You win! With {{remaining_guess}} {{'guess' if remaining_guess == 1 else 'guesses'}} left.</p>
+        <p>The answer was {{last_answer}}.</p>
         {% else %}
-        <p>Play again?</p>
-        <p>Guess a new number between 1 and 1000</p>
+        <p>You lose! :( The answer was {{last_answer}}...</p>
+        <p>Guess a new number between 1 and 1000:</p>
         {% endif %}
         {% with messages = get_flashed_messages(category_filter=['guess']) %}
         <form action="/guesser" method="post" class="guess-form">
@@ -37,15 +49,19 @@
         {% endwith %}
     </div>
     <div class="graph">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
+        {% for i in range(1,11) %}
+            {% set list = ["../static/sound/key01.mp3", "../static/sound/key03.mp3", "../static/sound/key06.mp3", "../static/sound/key09.mp3", "../static/sound/key12.mp3", "../static/sound/key15.mp3", "../static/sound/key16.mp3", "../static/sound/key18.mp3", "../static/sound/key21.mp3", "../static/sound/key23.mp3"]%}
+            {% if win %}
+            <span class="bar" id="barwin" data-audio={{list[i-1]}}></span>
+            {% elif i <= (turns_left) %}
+            <span class="bar" data-audio={{list[i-1]}}></span>
+            {% else %}
+            <span class="bar" id="barnone" data-audio={{list[i-1]}}></span>
+            {% endif %}
+        {% endfor %}
+        <audio class="my-audio"></audio>
     </div>
+    <script src="../static/js/myscript.js"></script>
 </body>
 </html>
+
